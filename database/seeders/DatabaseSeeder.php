@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'muh.yusril098@gmail.com',
             'phone' => '+62 812 8499 3957',
             'location' => 'Jakarta, Indonesia',
-            'github' => 'https://github.com/mhbmdyusril',
+            'github' => 'https://github.com/mhmdyusril',
             'linkedin' => 'https://linkedin.com/in/muhamad-yusril/',
             'photo' => null,
         ]);

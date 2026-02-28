@@ -30,7 +30,7 @@
                 <div class="flex gap-4 mt-8 reveal" style="transition-delay:0.5s">
                     @if($personal && $personal->github)
                     <a href="{{ $personal->github }}" target="_blank" class="transition-colors text-sm" style="color:var(--text-dim)">
-                        github.com/mhbmdyusril
+                        github.com/mhmdyusril
                     </a>
                     @endif
                     @if($personal && $personal->linkedin)
