@@ -17,6 +17,16 @@ $app = new Illuminate\Foundation\Application(
 
 /*
 |--------------------------------------------------------------------------
+| Vercel Serverless /tmp Directory Override
+|--------------------------------------------------------------------------
+*/
+if (isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL'])) {
+    $app->useStoragePath($_ENV['APP_STORAGE'] ?? '/tmp/storage');
+    $app->useBootstrapPath($_ENV['APP_BOOTSTRAP'] ?? '/tmp/bootstrap');
+}
+
+/*
+|--------------------------------------------------------------------------
 | Bind Important Interfaces
 |--------------------------------------------------------------------------
 |
