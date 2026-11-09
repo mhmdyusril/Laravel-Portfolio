@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio Muhamad Yusril - Full Stack Software Developer dengan keahlian Golang, Laravel, PostgreSQL, dan REST API.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="shortcut icon" href="/favicon.svg">
+    <title>Muhamad Yusril — Full Stack Developer</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: { 500: '#7c3aed', 600: '#6d28d9', 400: '#a78bfa' },
+                        accent:  { 500: '#2563eb', 400: '#60a5fa' },
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* ===== CSS VARIABLES ===== */
+        :root {
+            --bg:          #0a0a0a;
+            --bg-2:        rgba(255,255,255,0.05);
+            --bg-3:        rgba(0,0,0,0.4);
+            --border:      rgba(255,255,255,0.1);
+            --border-dim:  rgba(255,255,255,0.05);
+            --text:        #e2e8f0;
+            --text-muted:  #94a3b8;
+            --text-dim:    #4a5568;
+        }
+        html[data-theme="light"] {
+            --bg:          #f8fafc;
+            --bg-2:        rgba(0,0,0,0.04);
+            --bg-3:        rgba(255,255,255,0.8);
+            --border:      rgba(0,0,0,0.1);
+            --border-dim:  rgba(0,0,0,0.06);
+            --text:        #1e293b;
+            --text-muted:  #475569;
+            --text-dim:    #94a3b8;
+        }
+
+        /* ===== BASE ===== */
+        body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); transition:background 0.3s, color 0.3s; }
+        .glass        { background:var(--bg-2); backdrop-filter:blur(12px); border:1px solid var(--border); }
+        .glass-dark   { background:var(--bg-3); backdrop-filter:blur(12px); border:1px solid var(--border); }
+        .gradient-text{ background:linear-gradient(135deg,#a78bfa,#60a5fa); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+        .gradient-bg  { background:linear-gradient(135deg,#7c3aed,#2563eb); background-size:200% 200%; animation:gradient 6s ease infinite; }
+        .hero-bg      {
+            background: radial-gradient(ellipse at 20% 50%, rgba(124,58,237,0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 20%, rgba(37,99,235,0.1) 0%, transparent 50%), var(--bg);
+        }
+        html[data-theme="light"] .hero-bg {
+            background: radial-gradient(ellipse at 20% 50%, rgba(124,58,237,0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 20%, rgba(37,99,235,0.06) 0%, transparent 50%), var(--bg);
+        }
+        .reveal { opacity:0; transform:translateY(30px); transition:all 0.7s ease; }
+        .reveal.visible { opacity:1; transform:translateY(0); }
+        .tech-badge  { background:rgba(124,58,237,0.15); border:1px solid rgba(124,58,237,0.3); color:#a78bfa; padding:0.25rem 0.75rem; border-radius:9999px; font-size:0.75rem; font-weight:500; }
+        .skill-badge { background:rgba(37,99,235,0.1); border:1px solid rgba(37,99,235,0.25); color:#93c5fd; padding:0.375rem 1rem; border-radius:9999px; font-size:0.875rem; transition:all 0.3s; }
+        .skill-badge:hover { background:rgba(37,99,235,0.25); transform:translateY(-2px); }
+        html[data-theme="light"] .skill-badge { background:rgba(37,99,235,0.08); color:#1d4ed8; border-color:rgba(37,99,235,0.2); }
+        html[data-theme="light"] .tech-badge  { background:rgba(124,58,237,0.08); color:#7c3aed; border-color:rgba(124,58,237,0.25); }
+        .timeline-line::before { content:''; position:absolute; left:7px; top:0; bottom:0; width:2px; background:linear-gradient(to bottom,#7c3aed,#2563eb,transparent); }
+
+        /* ===== SECTION TEXT COLORS IN LIGHT MODE ===== */
+        html[data-theme="light"] .text-slate-300 { color:#334155 !important; }
+        html[data-theme="light"] .text-slate-400 { color:#475569 !important; }
+        html[data-theme="light"] .text-slate-500 { color:#64748b !important; }
+        html[data-theme="light"] .text-slate-600 { color:#94a3b8 !important; }
+        html[data-theme="light"] .text-white     { color:#0f172a !important; }
+        html[data-theme="light"] .glass { box-shadow:0 1px 4px rgba(0,0,0,0.06); }
+
+        /* ===== NAV CONTROLS ===== */
+        .nav-ctrl-btn {
+            display:inline-flex; align-items:center; gap:4px;
+            padding:4px 10px; border-radius:9999px; font-size:0.75rem; font-weight:600;
+            border:1px solid var(--border); background:var(--bg-2);
+            color:var(--text-muted); cursor:pointer; transition:all 0.2s;
+        }
+        .nav-ctrl-btn:hover { background:rgba(124,58,237,0.15); border-color:rgba(124,58,237,0.4); color:#a78bfa; }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width:6px; }
+        ::-webkit-scrollbar-track { background:var(--bg); }
+        ::-webkit-scrollbar-thumb { background:#7c3aed; border-radius:3px; }
+
+        @keyframes gradient { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+        .float-anim { animation:float 4s ease-in-out infinite; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- ===== NAVBAR ===== -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style="background:transparent;">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <!-- Brand -->
+            <a href="#hero" class="font-bold text-xl gradient-text">MY.</a>
+
+            <!-- Desktop Nav Links -->
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium" style="color:var(--text-muted)">
+                <a href="#about"      class="hover:text-purple-400 transition-colors" data-i18n="nav_about">Tentang</a>
+                <a href="#skills"     class="hover:text-purple-400 transition-colors" data-i18n="nav_skills">Keahlian</a>
+                <a href="#experience" class="hover:text-purple-400 transition-colors" data-i18n="nav_experience">Pengalaman</a>
+                <a href="#projects"   class="hover:text-purple-400 transition-colors" data-i18n="nav_projects">Proyek</a>
+                <a href="#education"  class="hover:text-purple-400 transition-colors" data-i18n="nav_education">Pendidikan</a>
+                <a href="#contact"    class="hover:text-purple-400 transition-colors" data-i18n="nav_contact">Kontak</a>
+            </div>
+
+            <!-- Controls: Lang + Theme + Mobile Burger -->
+            <div class="flex items-center gap-2">
+                <!-- Language Switcher -->
+                <div class="flex items-center rounded-full overflow-hidden" style="border:1px solid var(--border); background:var(--bg-2);">
+                    <button id="btn-lang-id" onclick="switchLang('id')"
+                            class="px-3 py-1 text-xs font-bold transition-all duration-200 gradient-bg text-white">ID</button>
+                    <span style="color:var(--border); font-size:0.7rem">|</span>
+                    <button id="btn-lang-en" onclick="switchLang('en')"
+                            class="px-3 py-1 text-xs font-bold transition-all duration-200" style="color:var(--text-dim)">EN</button>
+                </div>
+
+                <!-- Dark / Light Toggle -->
+                <button id="theme-toggle" class="nav-ctrl-btn" title="Toggle theme" onclick="toggleTheme()">
+                    <span id="theme-icon">🌙</span>
+                </button>
+
+                <!-- Mobile Burger -->
+                <button id="burger" class="md:hidden nav-ctrl-btn">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-dark mx-4 mb-2 rounded-xl p-4">
+            <div class="flex flex-col gap-3 text-sm font-medium" style="color:var(--text-muted)">
+                <a href="#about"      onclick="closeMobile()" data-i18n="nav_about">Tentang</a>
+                <a href="#skills"     onclick="closeMobile()" data-i18n="nav_skills">Keahlian</a>
+                <a href="#experience" onclick="closeMobile()" data-i18n="nav_experience">Pengalaman</a>
+                <a href="#projects"   onclick="closeMobile()" data-i18n="nav_projects">Proyek</a>
+                <a href="#education"  onclick="closeMobile()" data-i18n="nav_education">Pendidikan</a>
+                <a href="#contact"    onclick="closeMobile()" data-i18n="nav_contact">Kontak</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ================= HERO ================= -->
+    <section id="hero" class="min-h-screen hero-bg flex items-center pt-20">
+        <div class="max-w-6xl mx-auto px-6 py-20">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="text-sm font-semibold tracking-widest uppercase mb-4 reveal" style="color:#a78bfa" data-i18n="hello">👋 Halo, saya</p>
+                    <h1 class="text-5xl md:text-6xl font-black mb-3 reveal" style="transition-delay:0.1s">
+                        <span id="hero-name" class="gradient-text">Muhamad Yusril</span>
+                    </h1>
+                    <p id="hero-tagline" class="text-2xl font-semibold mb-6 reveal" style="transition-delay:0.2s; color:var(--text-muted)">
+                        Software Developer (Full Stack)
+                    </p>
+                    <p id="hero-location" class="text-lg leading-relaxed mb-8 reveal" style="transition-delay:0.3s; color:var(--text-muted)">
+                        📍 Jakarta, Indonesia
+                    </p>
+                    <div class="flex flex-wrap gap-4 reveal" style="transition-delay:0.4s">
+                        <a href="#contact" class="gradient-bg text-white font-semibold px-8 py-3 rounded-full hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:-translate-y-1" data-i18n="contact_me">
+                            Hubungi Saya
+                        </a>
+                        <a id="hero-github-btn" href="https://github.com/mhmdyusril" target="_blank" class="glass font-semibold px-8 py-3 rounded-full hover:bg-white/10 transition-all duration-300 hover:-translate-y-1" style="color:var(--text-muted)">
+                            GitHub →
+                        </a>
+                    </div>
+                    <div class="flex gap-4 mt-8 reveal" style="transition-delay:0.5s">
+                        <a id="hero-github" href="https://github.com/mhmdyusril" target="_blank" class="transition-colors text-sm" style="color:var(--text-dim)">
+                            github.com/mhmdyusril
+                        </a>
+                        <span style="color:var(--border)">·</span>
+                        <a id="hero-linkedin" href="https://linkedin.com/in/muhamad-yusril" target="_blank" class="transition-colors text-sm" style="color:var(--text-dim)">
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex justify-center items-center reveal" style="transition-delay:0.3s">
+                    <div class="relative">
+                        <div class="w-64 h-64 rounded-full gradient-bg opacity-10 absolute inset-0 blur-3xl animate-pulse"></div>
+                        <div class="w-56 h-56 glass rounded-3xl flex flex-col items-center justify-center float-anim relative z-10">
+                            <div class="text-6xl mb-3">💻</div>
+                            <p class="text-sm font-medium" style="color:var(--text-muted)" data-i18n="years_exp">5 Tahun</p>
+                            <p class="gradient-text font-bold" data-i18n="full_stack_dev">Full Stack Dev</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center mt-16 reveal" style="transition-delay:0.6s">
+                <a href="#about" class="flex flex-col items-center gap-2 transition-colors" style="color:var(--text-dim)">
+                    <span class="text-xs tracking-widest uppercase" data-i18n="scroll">Gulir</span>
+                    <svg class="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section id="about" class="py-24">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="reveal">
+                <p class="text-sm font-semibold tracking-widest uppercase mb-2" style="color:#a78bfa" data-i18n="about_tag">Tentang Saya</p>
+                <h2 class="text-4xl font-bold mb-12"><span data-i18n="about_title">Ringkasan</span> <span class="gradient-text" data-i18n="about_title_hl">Profesional</span></h2>
+            </div>
+            <div class="glass rounded-3xl p-8 md:p-12 reveal">
+                <p id="about-bio" class="text-lg leading-loose" style="color:var(--text-muted)">
+                    Software Developer dengan 5 tahun pengalaman dalam mengembangkan aplikasi web berskala institusi serta integrasi sistem nasional. Memiliki keahlian menyeluruh (Full Stack) pada ekosistem Golang, Laravel, optimasi database relasional PostgreSQL, dan arsitektur frontend modern.
+                </p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-10 pt-10" style="border-top:1px solid var(--border-dim)">
+                    <div class="text-center">
+                        <p id="stat-years" class="text-3xl font-black gradient-text">5+</p>
+                        <p class="text-sm mt-1" style="color:var(--text-dim)" data-i18n="years">Tahun Pengalaman</p>
+                    </div>
+                    <div class="text-center">
+                        <p id="stat-projects" class="text-3xl font-black gradient-text">2+</p>
+                        <p class="text-sm mt-1" style="color:var(--text-dim)" data-i18n="projects_lbl">Proyek</p>
+                    </div>
+                    <div class="text-center">
+                        <p id="stat-skills" class="text-3xl font-black gradient-text">20+</p>
+                        <p class="text-sm mt-1" style="color:var(--text-dim)" data-i18n="technologies">Teknologi</p>
+                    </div>
+                    <div class="text-center">
+                        <p id="stat-companies" class="text-3xl font-black gradient-text">2</p>
+                        <p class="text-sm mt-1" style="color:var(--text-dim)" data-i18n="companies">Perusahaan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SKILLS ================= -->
+    <section id="skills" class="py-24" style="background: radial-gradient(ellipse at 50% 0%, rgba(124,58,237,0.08) 0%, transparent 60%);">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="reveal">
+                <p class="text-sm font-semibold tracking-widest uppercase mb-2" style="color:#a78bfa" data-i18n="skills_tag">Yang Saya Kuasai</p>
+                <h2 class="text-4xl font-bold mb-12"><span data-i18n="skills_title">Kompetensi</span> <span class="gradient-text" data-i18n="skills_title_hl">Teknis</span></h2>
+            </div>
+            <div id="skills-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Dynamically loaded from Go API -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= EXPERIENCE ================= -->
+    <section id="experience" class="py-24">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="reveal">
+                <p class="text-sm font-semibold tracking-widest uppercase mb-2" style="color:#a78bfa" data-i18n="exp_tag">Riwayat Kerja</p>
+                <h2 class="text-4xl font-bold mb-12"><span data-i18n="exp_title">Pengalaman</span> <span class="gradient-text" data-i18n="exp_title_hl">Profesional</span></h2>
+            </div>
+            <div id="experience-container" class="relative timeline-line pl-8 flex flex-col gap-8">
+                <!-- Dynamically loaded from Go API -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PROJECTS ================= -->
+    <section id="projects" class="py-24" style="background: radial-gradient(ellipse at 80% 50%, rgba(37,99,235,0.08) 0%, transparent 60%);">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="reveal">
+                <p class="text-sm font-semibold tracking-widest uppercase mb-2" style="color:#a78bfa" data-i18n="proj_tag">Karya Saya</p>
+                <h2 class="text-4xl font-bold mb-12"><span data-i18n="proj_title">Proyek</span> <span class="gradient-text" data-i18n="proj_title_hl">Unggulan</span></h2>
+            </div>
+            <div id="projects-container" class="grid md:grid-cols-2 gap-6">
+                <!-- Dynamically loaded from Go API -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= EDUCATION ================= -->
+    <section id="education" class="py-24">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="reveal">
+                <p class="text-sm font-semibold tracking-widest uppercase mb-2" style="color:#a78bfa" data-i18n="edu_tag">Latar Belakang Akademis</p>
+                <h2 class="text-4xl font-bold mb-12"><span class="gradient-text" data-i18n="edu_title">Pendidikan</span></h2>
+            </div>
+            <div id="education-container" class="grid md:grid-cols-2 gap-6">
+                <!-- Dynamically loaded from Go API -->
+            </div>
+            <!-- Soft Skills -->
+            <div class="mt-10 glass rounded-2xl p-8 reveal">
+                <h3 class="font-bold text-lg mb-5" style="color:var(--text)" data-i18n="soft_skills">💡 Soft Skills</h3>
+                <div class="flex flex-wrap gap-3">
+                    <span class="skill-badge">Analytical Problem Solving & Technical Troubleshooting</span>
+                    <span class="skill-badge">Collaborative Teamwork in Institutional Environments</span>
+                    <span class="skill-badge">Professional Communication & Time Management</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact" class="py-24" style="background: radial-gradient(ellipse at 20% 100%, rgba(124,58,237,0.1) 0%, transparent 50%);">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="reveal">
+                <p class="text-sm font-semibold tracking-widest uppercase mb-2" style="color:#a78bfa" data-i18n="contact_tag">Hubungi Saya</p>
+                <h2 class="text-4xl font-bold mb-12"><span data-i18n="contact_title">Mari</span> <span class="gradient-text" data-i18n="contact_title_hl">Terhubung</span></h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Contact Info -->
+                <div class="reveal">
+                    <p class="text-lg leading-relaxed mb-8" style="color:var(--text-muted)" data-i18n="contact_desc">
+                        Tertarik bekerja sama atau punya proyek menarik? Jangan ragu untuk menghubungi saya!
+                    </p>
+                    <div class="space-y-5">
+                        <a id="contact-email-link" href="mailto:muh.yusril098@gmail.com" class="flex items-center gap-4 glass rounded-xl p-4 hover:border-purple-500/30 transition-all duration-300 group">
+                            <div class="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center text-white group-hover:scale-110 transition-transform">✉️</div>
+                            <div>
+                                <p class="text-xs uppercase tracking-wide" style="color:var(--text-dim)">Email</p>
+                                <p id="contact-email-text" class="font-medium" style="color:var(--text)">muh.yusril098@gmail.com</p>
+                            </div>
+                        </a>
+                        <a id="contact-phone-link" href="tel:+6281284993957" class="flex items-center gap-4 glass rounded-xl p-4 hover:border-purple-500/30 transition-all duration-300 group">
+                            <div class="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center text-white group-hover:scale-110 transition-transform">📱</div>
+                            <div>
+                                <p class="text-xs uppercase tracking-wide" style="color:var(--text-dim)">Phone</p>
+                                <p id="contact-phone-text" class="font-medium" style="color:var(--text)">+62 812-8499-3957</p>
+                            </div>
+                        </a>
+                        <a id="contact-linkedin-link" href="https://linkedin.com/in/muhamad-yusril/" target="_blank" class="flex items-center gap-4 glass rounded-xl p-4 hover:border-blue-500/30 transition-all duration-300 group">
+                            <div class="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center text-white group-hover:scale-110 transition-transform">💼</div>
+                            <div>
+                                <p class="text-xs uppercase tracking-wide" style="color:var(--text-dim)">LinkedIn</p>
+                                <p class="font-medium" style="color:var(--text)">linkedin.com/in/muhamad-yusril/</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="glass rounded-2xl p-8 reveal">
+                    <div id="contact-alert" class="hidden mb-6 px-4 py-3 rounded-xl text-sm"></div>
+                    <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-5">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-xs uppercase tracking-wide block mb-2" style="color:var(--text-dim)" data-i18n="form_name">Nama</label>
+                                <input type="text" name="name" required placeholder="John Doe" data-i18n-ph="ph_name"
+                                       class="w-full glass bg-transparent rounded-xl px-4 py-3 text-sm outline-none placeholder-opacity-30 transition-all"
+                                       style="color:var(--text)">
+                            </div>
+                            <div>
+                                <label class="text-xs uppercase tracking-wide block mb-2" style="color:var(--text-dim)" data-i18n="form_email">Email</label>
+                                <input type="email" name="email" required placeholder="email@contoh.com" data-i18n-ph="ph_email"
+                                       class="w-full glass bg-transparent rounded-xl px-4 py-3 text-sm outline-none transition-all"
+                                       style="color:var(--text)">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-xs uppercase tracking-wide block mb-2" style="color:var(--text-dim)" data-i18n="form_subject">Subjek</label>
+                            <input type="text" name="subject" required placeholder="Diskusi Proyek..." data-i18n-ph="ph_subject"
+                                   class="w-full glass bg-transparent rounded-xl px-4 py-3 text-sm outline-none transition-all"
+                                   style="color:var(--text)">
+                        </div>
+                        <div>
+                            <label class="text-xs uppercase tracking-wide block mb-2" style="color:var(--text-dim)" data-i18n="form_message">Pesan</label>
+                            <textarea name="message" rows="5" required placeholder="Halo Yusril, saya ingin..." data-i18n-ph="ph_message"
+                                      class="w-full glass bg-transparent rounded-xl px-4 py-3 text-sm outline-none transition-all resize-none"
+                                      style="color:var(--text)"></textarea>
+                        </div>
+                        <button type="submit" class="w-full gradient-bg text-white font-semibold py-3.5 rounded-xl hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:-translate-y-0.5 active:scale-95" data-i18n="form_send">
+                            Kirim Pesan ✉️
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-sm" style="border-top:1px solid var(--border-dim); color:var(--text-dim)">
+        <p>© 2026 <span style="color:var(--text-muted); font-weight:500">Muhamad Yusril</span>. <span data-i18n="footer">Dibuat dengan ❤️ menggunakan Golang (Serverless) & PostgreSQL.</span></p>
+    </footer>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
